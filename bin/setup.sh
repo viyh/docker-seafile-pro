@@ -14,7 +14,7 @@ mv "/seafile-pro-server_${SEAFILE_VERSION}_x86-64.tar.gz" installed
 cd "/seafile/seafile-pro-server-${SEAFILE_VERSION}"
 
 # Setup seafile
-ulimit -n 30000
+# ulimit -n 30000
 ./setup-seafile.sh
 
 # Custom configurations
