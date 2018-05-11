@@ -1,6 +1,6 @@
 FROM		phusion/baseimage:0.9.18
 MAINTAINER	xama <oliver@xama.us>
-ENV		SEAFILE_VERSION 6.1.9
+ENV		SEAFILE_VERSION 6.2.12
 
 EXPOSE		8082 8000
 
