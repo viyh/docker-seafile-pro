@@ -1,4 +1,4 @@
-FROM debian
+FROM phusion/baseimage:0.10.2
 
 ENV	SEAFILE_VERSION 6.3.12
 
@@ -12,11 +12,10 @@ RUN apt-get update && apt-get upgrade -y && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
         openjdk-8-jre sqlite3 wget \
         poppler-utils libpython2.7 python-pip python-setuptools python-imaging \
-        python-mysqldb python-memcache python-ldap python-urllib3 \
-        libreoffice libreoffice-script-provider-python \
-        fonts-vlgothic ttf-wqy-microhei ttf-wqy-zenhei xfonts-wqy && \
+        python-mysqldb python-memcache python-ldap python-urllib3 && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-    pip install boto
+    pip install boto requests moviepy Pillow==4.3.0 && \
+    ln -sf /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java /usr/bin/
 
 # RUN yum install -y epel-release && yum update -y && \
 #     yum install -y \
@@ -30,7 +29,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 
 # Download seafile binary
-RUN	wget "https://download.seafile.com/d/6e5297246c/files/?p=/pro/seafile-pro-server_${SEAFILE_VERSION}_x86-64.tar.gz&dl=1" -O "/seafile-pro-server_${SEAFILE_VERSION}_x86-64.tar.gz"
+RUN	wget -q "https://download.seafile.com/d/6e5297246c/files/?p=/pro/seafile-pro-server_${SEAFILE_VERSION}_x86-64.tar.gz&dl=1" -O "/seafile-pro-server_${SEAFILE_VERSION}_x86-64.tar.gz"
 
 # Install Seafile service.
 ADD	service/seafile/run.sh /etc/service/seafile/run
